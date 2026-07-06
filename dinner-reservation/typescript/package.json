@@ -1,0 +1,15 @@
+{
+	"name": "agenticemail-dinner-reservation",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"start": "tsx src/agent.ts"
+	},
+	"dependencies": {
+		"@anthropic-ai/sdk": "^0.40.0",
+		"agenticemail": "^0.1.1"
+	},
+	"devDependencies": {
+		"tsx": "^4.19.0"
+	}
+}

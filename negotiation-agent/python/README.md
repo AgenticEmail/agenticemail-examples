@@ -1,0 +1,16 @@
+# Negotiation agent - Python
+
+```bash
+pip install -r requirements.txt
+export AGENTICEMAIL_API_KEY="am_..."   # app.agenticemail.dev/keys
+export ANTHROPIC_API_KEY="sk-ant-..."  # console.anthropic.com
+python agent.py
+```
+
+The agent prints its inbox address on startup. Email it and it replies. It only
+answers mail that arrives after it starts.
+
+- `agent.py` - creates the inbox and runs the poll/reply loop.
+- `prompt.py` - the negotiation tactics and behaviour. Edit `build_system_prompt` to match how hard you want to push.
+
+Config is via environment variables - see `.env.example`.
