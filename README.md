@@ -101,6 +101,28 @@ Connect AgenticEmail to Claude Code, Cursor, Windsurf, or Cline over MCP and
 your existing agent gets an inbox with zero glue code - see
 [agenticemail.dev/build](https://agenticemail.dev/build).
 
+## Verify it works
+
+Every example uses the same inbox path (create, send, receive, reply). One
+smoke test exercises it end-to-end against the live API, plus the Claude
+text-block extraction the agents rely on:
+
+```bash
+pip install agenticemail anthropic
+export AGENTICEMAIL_API_KEY="am_..."
+export ANTHROPIC_API_KEY="sk-ant-..."   # optional
+export INBOX_DOMAIN="yourdomain.com"    # optional, if your org has >1 domain
+python scripts/smoke_test.py
+```
+
+It reuses a single inbox (fixed `client_id`) so it never accumulates inboxes.
+CI ([.github/workflows/smoke.yml](./.github/workflows/smoke.yml)) runs it on
+every push and weekly - add `AGENTICEMAIL_API_KEY` (and optionally
+`ANTHROPIC_API_KEY`, `INBOX_DOMAIN`) as repo secrets to enable it.
+
+> Multiple verified domains on your org? Set `INBOX_DOMAIN` - `create()` needs a
+> domain when there is no default.
+
 ## Learn more
 
 - Docs: [agenticemail.dev/docs](https://agenticemail.dev/docs)

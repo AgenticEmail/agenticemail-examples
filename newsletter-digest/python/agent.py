@@ -21,7 +21,10 @@ USER_EMAIL = os.environ.get("USER_EMAIL", "you@example.com")
 email = AgenticEmail(api_key=os.environ["AGENTICEMAIL_API_KEY"])
 claude = Anthropic()  # reads ANTHROPIC_API_KEY
 
-inbox = email.inboxes.create(username=INBOX_USERNAME)
+inbox = email.inboxes.create(
+    username=INBOX_USERNAME,
+    **({"domain": os.environ["INBOX_DOMAIN"]} if os.environ.get("INBOX_DOMAIN") else {}),
+)
 inbox_email = inbox["id"]
 system_prompt = build_system_prompt(inbox_email, USER_EMAIL)
 

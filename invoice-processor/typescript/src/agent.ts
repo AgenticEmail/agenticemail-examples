@@ -19,7 +19,10 @@ const AUTO_APPROVE_LIMIT = Number(process.env.AUTO_APPROVE_LIMIT ?? "1000");
 const email = new AgenticEmail({ apiKey: process.env.AGENTICEMAIL_API_KEY! });
 const claude = new Anthropic(); // reads ANTHROPIC_API_KEY
 
-const inbox = await email.inboxes.create({ username: INBOX_USERNAME });
+const inbox = await email.inboxes.create({
+	username: INBOX_USERNAME,
+	...(process.env.INBOX_DOMAIN ? { domain: process.env.INBOX_DOMAIN } : {}),
+});
 const inboxEmail = inbox.id;
 const systemPrompt = buildSystemPrompt(inboxEmail, AP_EMAIL, AUTO_APPROVE_LIMIT);
 
