@@ -29,11 +29,18 @@ clone the folder, set two environment variables, and run.
 | --- | --- |
 | [support-agent](./support-agent) | Triage, respond, escalate, follow up, close. |
 
+**Recruiting**
+
+| Example | What it does |
+| --- | --- |
+| [ai-recruiter](./ai-recruiter) | Screen inbound applicants, coordinate interviews, keep candidates warm. |
+
 **Finance**
 
 | Example | What it does |
 | --- | --- |
 | [invoice-processor](./invoice-processor) | Claude reads PDF invoices, matches, and routes them by amount. |
+| [receipt-parser](./receipt-parser) | Claude vision reads receipt photos and PDFs into clean expense rows. |
 
 **Verification**
 
