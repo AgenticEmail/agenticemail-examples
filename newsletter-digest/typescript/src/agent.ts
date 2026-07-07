@@ -46,8 +46,7 @@ const reply = await claude.messages.create({
 	system: systemPrompt,
 	messages: [{ role: "user", content: items }],
 });
-const block = reply.content[0];
-const digest = block.type === "text" ? block.text : "";
+const digest = reply.content.filter((b) => b.type === "text").map((b) => b.text).join("");
 
 await email.messages.send(inboxEmail, {
 	to: [USER_EMAIL],

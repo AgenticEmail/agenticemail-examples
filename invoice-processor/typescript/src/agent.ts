@@ -40,7 +40,7 @@ async function extractInvoice(pdfBytes: ArrayBuffer): Promise<Invoice | null> {
 	const b64 = Buffer.from(pdfBytes).toString("base64");
 	const reply = await claude.messages.create({
 		model: MODEL,
-		max_tokens: 1024,
+		max_tokens: 2048,
 		system: systemPrompt,
 		messages: [
 			{
@@ -59,8 +59,7 @@ async function extractInvoice(pdfBytes: ArrayBuffer): Promise<Invoice | null> {
 			},
 		],
 	});
-	const block = reply.content[0];
-	const raw = block.type === "text" ? block.text : "";
+	const raw = reply.content.filter((b) => b.type === "text").map((b) => b.text).join("");
 	const start = raw.indexOf("{");
 	const end = raw.lastIndexOf("}");
 	if (start === -1 || end === -1) {

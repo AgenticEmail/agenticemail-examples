@@ -25,12 +25,11 @@ const systemPrompt = buildSystemPrompt(inboxEmail, USER_NAME);
 async function draftReply(message: string): Promise<string> {
 	const reply = await claude.messages.create({
 		model: MODEL,
-		max_tokens: 1024,
+		max_tokens: 2048,
 		system: systemPrompt,
 		messages: [{ role: "user", content: message }],
 	});
-	const block = reply.content[0];
-	return block.type === "text" ? block.text : "";
+	return reply.content.filter((b) => b.type === "text").map((b) => b.text).join("");
 }
 
 console.log(`Inbox Zero Agent inbox: ${inboxEmail}`);

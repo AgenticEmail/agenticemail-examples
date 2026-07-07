@@ -40,7 +40,7 @@ def extract_invoice(pdf_bytes: bytes) -> dict | None:
     b64 = base64.b64encode(pdf_bytes).decode()
     reply = claude.messages.create(
         model=MODEL,
-        max_tokens=1024,
+        max_tokens=2048,
         system=system_prompt,
         messages=[
             {
@@ -59,7 +59,7 @@ def extract_invoice(pdf_bytes: bytes) -> dict | None:
             }
         ],
     )
-    raw = reply.content[0].text
+    raw = "".join(b.text for b in reply.content if b.type == "text")
     start = raw.find("{")
     end = raw.rfind("}")
     if start == -1 or end == -1:

@@ -50,7 +50,7 @@ def main() -> None:
         system=system_prompt,
         messages=[{"role": "user", "content": items}],
     )
-    digest = reply.content[0].text
+    digest = "".join(b.text for b in reply.content if b.type == "text")
 
     email.messages.send(
         inbox_email,

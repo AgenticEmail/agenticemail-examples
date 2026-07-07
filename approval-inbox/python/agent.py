@@ -29,11 +29,11 @@ system_prompt = build_system_prompt(inbox_email, APPROVER_NAME)
 def answer(message: str) -> str:
     reply = claude.messages.create(
         model=MODEL,
-        max_tokens=1024,
+        max_tokens=2048,
         system=system_prompt,
         messages=[{"role": "user", "content": message}],
     )
-    return reply.content[0].text
+    return "".join(b.text for b in reply.content if b.type == "text")
 
 
 def main() -> None:
