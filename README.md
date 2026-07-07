@@ -35,6 +35,12 @@ clone the folder, set two environment variables, and run.
 | --- | --- |
 | [invoice-processor](./invoice-processor) | Claude reads PDF invoices, matches, and routes them by amount. |
 
+**Verification**
+
+| Example | What it does |
+| --- | --- |
+| [signup-verification-agent](./signup-verification-agent) | Give a browser agent an inbox to catch signup links and 2FA codes. |
+
 **Personal**
 
 | Example | What it does |
